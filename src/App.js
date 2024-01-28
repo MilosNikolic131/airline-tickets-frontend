@@ -1,20 +1,32 @@
-import './App.css';
-import Navbar from './Navbar';
+import Navbar from './components/Navbar';
 import Home from './Home';
+import Flights from './components/Flights';
+import Login from './components/Login';
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+
 
 function App() {
-  const title = 'Žiža airlines'
+  const title = 'Žiža airlines';
+
+  function addToken(auth_token){
+    setToken(auth_token);
+  }
 
 
   return (
-    <div className="App">
-      <Navbar />
-
+    <Router>
+      <Navbar token = {token}></Navbar>
       <div className="content">
-        <h1>{title}</h1>
-        <Home />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/flights" element={<Flights addToken={addToken} />} />
+          <Route exact path="/login" element={<Login addToken={addToken} />} />
+        </Routes>
+
       </div>
-    </div> 
+    </Router>
   );
 }
 
