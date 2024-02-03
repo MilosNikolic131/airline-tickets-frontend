@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = (addToken) => {
     const [data, setData] = useState({
-        username: "",
+        name: "",
         password: ""
     });
     let navigate = useNavigate();
@@ -15,7 +15,7 @@ const Login = (addToken) => {
     }
     function handleLogin(e) {
         e.preventDefault();
-        axios.post("http://127.0.0.1:8000/api/v1/auth/authenticate", data).then((res) => {
+        axios.post("http://127.0.0.1:8080/api/v1/auth/authenticate", data).then((res) => {
             console.log(res.data);
             window.sessionStorage.setItem("auth_token", res.data.token);
             window.sessionStorage.setItem("ulogovan","user");
@@ -30,13 +30,14 @@ const Login = (addToken) => {
     }
     return (
         <div className="forma-n">
-        <img className='no-img' src={korisnik} />
         <form onSubmit={handleLogin}>
         <h2>Forma za logovanje korisnika</h2>
-            <label>Email:</label>
-            <input  className='forma-input' type="text" required name="email" onInput={handleInput}></input>
+            <label>Username:</label>
+            <input  className='forma-input' type="text" required name="name" onInput={handleInput}></input>
+            <br/>
             <label>Lozinka:</label>
             <input className='forma-input' type="text" required name="password" onInput={handleInput}></input>
+            <br/>
             <button buttonSize='btn--large' buttonStyle='btn--outline' >
                                 Login
                             </button>
