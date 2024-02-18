@@ -4,6 +4,7 @@ import Flights from './components/Flights';
 import Login from './components/Login';
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
 
 
 
@@ -21,8 +22,8 @@ function App() {
       <div className="content">
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/flights" element={<Flights addToken={addToken} />} />
-          <Route exact path="/login" element={<Login addToken={addToken} />} />
+          <Route exact path="/flights" element={<Flights  />} />
+          <Route exact path="/login" element={<Login />} />
         </Routes>
 
       </div>
