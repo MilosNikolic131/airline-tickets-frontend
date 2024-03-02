@@ -5,55 +5,34 @@ import axios, * as others from 'axios';
 
 
 const Fligths = () => {
-    // const [error, SetError] = useState();
     const [dataFlights, setData] = useState();
+    const [destinations, setDestinations] = useState({
+      fromDest: "",
+      toDest: ""
+    });
 
-    // const getData = async () => {
-    //     var axios = require('axios');
-    //     var qs = require('qs');
-    //     var data = qs.stringify({
+  function handleInput(e) {
+    let newData = destinations;
+    newData[e.target.name] = e.target.value;
+    setDestinations(newData);
+    }
 
-    //     });
-    //     var config = {
-    //         method: 'get',
-    //         url: 'http://127.0.0.1:8080/api/v1/airline',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Authorization': 'Bearer ' + window.sessionStorage.auth_token
-    //         },
-    //         data: data
-    //     };
+    const handleFilter = async () => {
+      let response = await fetch(`http://127.0.0.1:8080/api/v1/airline/${destinations.fromDest}-${destinations.toDest}`, {
+        method: "GET",
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + window.sessionStorage.auth_token
+        },
+        mode: 'cors',
+        cache: 'default'
+      });
 
-    //     axios(config)
-    //         .then(function (response) {
-    //             console.log(JSON.stringify(response.data));
-    //             setData(response.data.data);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-
-    //   };
-
-    // const axios = require('axios');
-    // const qs = require('qs');
-
-  //   const getData = async () => {
-  //     try {
-  //         const data = qs.stringify({});
-  //         const response = await axios.get('http://127.0.0.1:8080/api/v1/airline', {
-  //             headers: {
-  //                 'Accept': 'application/json',
-  //                 'Authorization': 'Bearer ' + window.sessionStorage.auth_token
-  //             },
-  //             data: data
-  //         });
-  //         console.log(JSON.stringify(response.data));
-  //         setData(response.data.data); // Assuming setData is defined elsewhere
-  //     } catch (error) {
-  //         console.log(error);
-  //     }
-  // };
+      let data = await response.json();
+      setData(data);
+      
+      console.log(data);
+    };
 
     const getDataFetch = async () => {
         let response = await fetch("http://127.0.0.1:8080/api/v1/airline", {
@@ -77,10 +56,21 @@ const Fligths = () => {
     }, []);
 
     return ( 
-        <div className="wrapper">
-            <h1>Flights</h1>
+        <div className="create">
+          <h1>Flights</h1>
+            <h2>Search flights:</h2>
+            <label>Destination from:</label>
+            <input  className='create' type="text" required name="fromDest" onInput={handleInput}></input>
+            <label>Destination to:</label>
+            <input  className='create' type="text" required name="toDest" onInput={handleInput}></input>
+            <button buttonSize='btn--large' buttonStyle='btn--outline' onClick={handleFilter}>Search</button>
+            <button buttonSize='btn--large' buttonStyle='btn--outline' onClick={getDataFetch}>Reset filter</button>
+            <br/>
+            <br/>
+            <br/>
+            <h2>Available flights</h2>
             {dataFlights && dataFlights.map((flight, index) =>(
-                <div key={index} className="container">
+                <div key={index} className="blog-details">
                     <h2>Flight Origin:</h2>
                     <p>{flight.flightOrigin}</p>
                     <h2>Flight Destination:</h2>

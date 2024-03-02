@@ -52,13 +52,23 @@
 }
 
 /* blog details page */
+.blog-details{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 25px;
+  border: 2px solid #f1356d;
+  padding: 20px;
+}
+
 .blog-details h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 10px;
+  
 }
 .blog-details div {
   margin: 20px 0;
+  border: 1px solid #000000;
 }
 .blog-details button {
   background: #f1356d;
@@ -74,6 +84,8 @@
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .create label {
   text-align: left;
@@ -99,4 +111,6 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
 }

@@ -21,9 +21,10 @@ function App() {
       <Navbar token = {token}></Navbar>
       <div className="content">
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/flights" element={<Flights  />} />
+          <Route exact path="/" element={<Login />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/flights" element={<Flights/>} />
         </Routes>
 
       </div>
